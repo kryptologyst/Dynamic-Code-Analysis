@@ -1,0 +1,131 @@
+# @package _global_
+defaults:
+  - _self_
+  - override /data: synthetic
+  - override /model: basic_analyzer
+  - override /evaluation: standard_metrics
+
+# Global configuration
+project_name: "dynamic_code_analysis"
+version: "1.0.0"
+description: "Dynamic Code Analysis for Security and Quality Assessment"
+
+# Logging configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "dynamic_analysis.log"
+
+# Analysis configuration
+analysis:
+  enable_memory_monitoring: true
+  enable_security_scanning: true
+  enable_api_tracking: true
+  memory_threshold_mb: 100.0
+  execution_timeout: 30.0
+  
+  # Security patterns
+  dangerous_functions:
+    - eval
+    - exec
+    - compile
+    - __import__
+    - open
+    - file
+    - input
+    - raw_input
+    - os.system
+    - subprocess.call
+    - pickle.loads
+    - marshal.loads
+    - shelve.open
+  
+  suspicious_patterns:
+    password: high
+    secret: high
+    token: medium
+    key: medium
+    admin: medium
+    root: high
+    sudo: high
+
+# Data configuration
+data:
+  synthetic:
+    num_functions: 100
+    execution_variations: 10
+    include_exceptions: true
+    include_security_issues: true
+  
+  real:
+    source_directory: "src/"
+    file_extensions: [".py"]
+    exclude_patterns: ["__pycache__", ".git", "venv", "env"]
+
+# Model configuration
+model:
+  basic_analyzer:
+    timeout_protection: true
+    memory_monitoring: true
+    security_scanning: true
+  
+  advanced_analyzer:
+    timeout_protection: true
+    memory_monitoring: true
+    security_scanning: true
+    api_tracking: true
+    performance_profiling: true
+
+# Evaluation configuration
+evaluation:
+  standard_metrics:
+    include_performance: true
+    include_security: true
+    include_detection: true
+  
+  advanced_metrics:
+    include_performance: true
+    include_security: true
+    include_detection: true
+    include_explainability: true
+    include_privacy: false
+
+# Visualization configuration
+visualization:
+  output_directory: "assets/"
+  formats: ["png", "html"]
+  dpi: 300
+  style: "seaborn-v0_8"
+  
+  charts:
+    - execution_time_distribution
+    - memory_usage_scatter
+    - security_issues_by_function
+    - exception_rate_by_function
+    - roc_curve
+    - precision_recall_curve
+    - performance_trends
+
+# Demo configuration
+demo:
+  streamlit:
+    port: 8501
+    host: "localhost"
+    theme: "light"
+    layout: "wide"
+  
+  gradio:
+    port: 7860
+    host: "localhost"
+    share: false
+
+# Privacy and security configuration
+privacy:
+  enable_data_anonymization: true
+  hash_sensitive_data: true
+  remove_pii: true
+  
+security:
+  input_validation: true
+  allow_list_file_types: [".py", ".json", ".csv"]
+  audit_logging: true
